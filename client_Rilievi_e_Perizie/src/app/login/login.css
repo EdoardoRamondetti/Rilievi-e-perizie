@@ -1,0 +1,187 @@
+/* ── Pagina intera ─────────────────────────────────────────────────────────── */
+.pagina-login {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: #0d1117;         /* sfondo scuro neutro */
+}
+
+/* ── Card ──────────────────────────────────────────────────────────────────── */
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  background: #161b22;
+  border: 1px solid #21262d;
+  border-radius: 12px;
+  padding: 36px;
+
+  /* Animazione di entrata */
+  animation: saliSu 0.35s ease both;
+}
+
+@keyframes saliSu {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Brand / Logo ──────────────────────────────────────────────────────────── */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.logo-box {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  background: #d85a30;         /* arancio identitario */
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-box svg {
+  width: 22px;
+  height: 22px;
+}
+
+.brand-nome {
+  font-size: 16px;
+  font-weight: 600;
+  color: #e6edf3;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.brand-sub {
+  font-size: 12px;
+  color: #7d8590;
+  margin: 2px 0 0;
+}
+
+/* ── Separatore ────────────────────────────────────────────────────────────── */
+.separatore {
+  border: none;
+  border-top: 1px solid #21262d;
+  margin: 0 0 24px;
+}
+
+/* ── Campi form ────────────────────────────────────────────────────────────── */
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.etichetta {
+  font-size: 12px;
+  font-weight: 600;
+  color: #7d8590;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.input {
+  padding: 9px 12px;
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  color: #e6edf3;
+  font-size: 14px;
+  font-family: inherit;
+  transition: border-color 0.15s;
+  outline: none;
+}
+
+.input:focus {
+  border-color: #d85a30;
+}
+
+.input::placeholder {
+  color: #484f58;
+}
+
+/* Stato disabilitato durante il loading */
+.input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Errore ────────────────────────────────────────────────────────────────── */
+.errore {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: rgba(248, 81, 73, 0.1);
+  border: 1px solid rgba(248, 81, 73, 0.4);
+  border-radius: 6px;
+  color: #f85149;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+.errore svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+/* ── Bottone accedi ─────────────────────────────────────────────────────────── */
+.btn-accedi {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px;
+  background: #d85a30;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+  margin-top: 4px;
+}
+
+.btn-accedi:hover:not(:disabled) {
+  background: #c0501f;
+}
+
+.btn-accedi:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ── Spinner ────────────────────────────────────────────────────────────────── */
+.spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: ruota 0.65s linear infinite;
+}
+
+@keyframes ruota {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Nota informativa ──────────────────────────────────────────────────────── */
+.nota {
+  text-align: center;
+  font-size: 12px;
+  color: #484f58;
+  margin-top: 16px;
+  line-height: 1.5;
+}

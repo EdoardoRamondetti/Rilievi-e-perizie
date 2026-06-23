@@ -1,0 +1,43 @@
+<main class="main-content">
+  <header class="main-header">
+    <div class="header-left">
+      <h1>Mappa Perizie</h1>
+      <p class="header-subtitle">Visualizza tutte le perizie sulla mappa</p>
+    </div>
+    <div class="header-actions">
+      <div class="filter-group">
+        <label>Filtra per operatore:</label>
+        <select (change)="selezionaOperatore($event)">
+          <option value="">Tutti gli operatori</option>
+          @for (item of operatori; track $index) {
+            <option>{{item.username}}</option>
+          }
+        </select>
+      </div>
+      <div class="stats-badge">
+        <span>{{ perizie.length }} perizie</span>
+      </div>
+    </div>
+  </header>
+
+  @if (errorMessage) {
+    <div class="error-banner">
+      <span>{{ errorMessage }}</span>
+      <button (click)="errorMessage = ''">x</button>
+    </div>
+  }
+
+<div class="view-mappa">
+  <div class="mappa-wrapper">
+    <div #mapContainer id="mappa-container"></div>
+  </div>
+  @if (showDetailsPanel && periziaSselezionata) {
+    <app-details-perizia
+      [perizia]="periziaSselezionata"
+      [routeInfo]="selectedRouteInfo"
+      (showRoute)="mostraPercorsoPerizia()"
+      (closePanel)="closeDetailsPanel()">
+    </app-details-perizia>
+  }
+</div>
+</main>

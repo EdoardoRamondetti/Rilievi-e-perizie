@@ -1,0 +1,130 @@
+@if (perizia) {
+  <div class="detail-panel">
+    <div class="panel-header">
+      <h2>{{ perizia.codice || 'Perizia' }}</h2>
+      <button class="close-btn" (click)="onClose()" title="Chiudi">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="panel-content">
+      <!-- Info Generali -->
+      <div class="detail-section">
+        <div class="section-header">
+          <h4>Informazioni Generali</h4>
+        </div>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="label">Operatore</span>
+            <span class="value">{{ perizia.operatore }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Data</span>
+            <span class="value">{{ dataCorretta(perizia.dataOra) }}</span>
+          </div>
+          <div class="info-item full-width">
+            <span class="label">Coordinate</span>
+            <span class="value">
+              {{ perizia.coordinate?.lat?.toFixed(5) || '-' }}° N / {{ perizia.coordinate?.lng?.toFixed(5) || '-' }}° E
+            </span>
+          </div>
+        </div>
+        @if (routeInfo) {
+          <div class="route-info">
+            <div class="route-grid">
+              <div class="route-item">
+                <span class="label">Distanza da sede</span>
+                <span class="value">{{ routeInfo.distanceKm.toFixed(1) }} km</span>
+              </div>
+              <div class="route-item">
+                <span class="label">Tempo di percorrenza</span>
+                <span class="value">{{ routeInfo.durationMin }} min</span>
+              </div>
+            </div>
+            <p class="route-note">Tempo calcolato a partire dalla sede dell'ufficio verso il luogo della perizia.</p>
+          </div>
+        } @else {
+          <p class="route-note">Clicca sul marker per visualizzare percorso e tempo di percorrenza dalla sede dell'ufficio.</p>
+        }
+      </div>
+
+      <!-- Descrizione -->
+      <div class="detail-section">
+        <div class="section-header">
+          <h4>Descrizione</h4>
+          <button class="edit-btn" type="button" (click)="onEditDescription()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+            </svg>
+            Modifica
+          </button>
+        </div>
+        <p class="description-text">{{ perizia.descrizione || 'Nessuna descrizione disponibile.' }}</p>
+
+        @if (editingDescription) {
+          <div class="edit-form">
+            <textarea rows="4" [value]="localDescription" (input)="localDescription = $any($event.target).value"></textarea>
+            <div class="edit-actions">
+              <button class="btn-secondary" type="button" (click)="onCancelDescription()">Annulla</button>
+              <button class="btn-primary" type="button" [disabled]="savingDescription" (click)="onSaveDescription()">
+                {{ savingDescription ? 'Salvataggio...' : 'Salva' }}
+              </button>
+            </div>
+            @if (ajaxErrorMessage) {
+              <p class="error-text">{{ ajaxErrorMessage }}</p>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Immagini -->
+      @if (perizia.foto && perizia.foto.length > 0) {
+        <div class="detail-section">
+          <h4 style="margin-bottom: 10px;">Immagini ({{ perizia.foto.length }})</h4>
+          <div class="images-gallery">
+            @for (foto of perizia.foto; track $index) {
+              <div class="image-card">
+                <div class="image-wrapper">
+                  <img [src]="foto.url || foto.src || 'https://via.placeholder.com/400x250?text=Immagine+non+disponibile'" [alt]="foto.commento || 'Immagine perizia ' + ($index + 1)" />
+                </div>
+                @if (editingFotoIndex === $index) {
+                  <div class="image-info edit-mode">
+                    <textarea rows="3" [value]="editingComment" (input)="editingComment = $any($event.target).value"></textarea>
+                    <div class="image-actions">
+                      <button class="btn-secondary" type="button" (click)="onCancelComment()">Annulla</button>
+                      <button class="btn-primary" type="button" [disabled]="savingComment" (click)="onSaveComment($index)">
+                        {{ savingComment ? 'Salvataggio...' : 'Salva' }}
+                      </button>
+                    </div>
+                    @if (ajaxErrorMessage) {
+                      <p class="error-text">{{ ajaxErrorMessage }}</p>
+                    }
+                  </div>
+                } @else {
+                  <div class="image-info">
+                    <p class="image-comment">{{ foto.commento || 'Nessun commento' }}</p>
+                    <button class="edit-btn small" type="button" title="Modifica commento" (click)="onEditComment($index)">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                      </svg>
+                    </button>
+                  </div>
+                }
+              </div>
+            }
+          </div>
+        </div>
+      } @else {
+        <div class="detail-section">
+          <h4>Immagini</h4>
+          <p class="description-text">Nessuna immagine disponibile per questa perizia.</p>
+        </div>
+      }
+    </div>
+  </div>
+}
