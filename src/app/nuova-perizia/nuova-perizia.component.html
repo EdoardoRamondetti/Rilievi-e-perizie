@@ -1,0 +1,67 @@
+<ion-content [fullscreen]="true" class="main-container">
+  <div class="blob"></div>
+
+  <div class="content-wrapper">
+    <!-- Header con tasto Indietro -->
+    <header class="glass-header">
+      <ion-back-button defaultHref="/dashboard" text="" icon="chevron-back"></ion-back-button>
+      <h1>Nuovo Rilievo</h1>
+      <div class="auto-data">
+        <span class="badge">GPS ACTIVE</span>
+      </div>
+    </header>
+
+    <!-- Sezione Descrizione Generale -->
+    <section class="glass-card">
+      <label class="section-label">DESCRIZIONE GENERALE</label>
+      <textarea 
+        [(ngModel)]="perizia.descrizione" 
+        placeholder="Inserisci i dettagli della perizia..."
+        rows="4">
+      </textarea>
+    </section>
+
+    <!-- Sezione Foto -->
+    <section class="photo-section">
+      <div class="section-header">
+        <label class="section-label">FOTOGRAFIE</label>
+        <button class="btn-photo" (click)="takePhoto()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+            <circle cx="12" cy="13" r="4"></circle>
+          </svg>
+          Scatta
+        </button>
+      </div>
+
+      <div class="photo-grid">
+        @for (foto of perizia.foto; track $index) {
+          <div class="photo-item glass-card">
+            <img [src]="foto.webviewPath" />
+            <input 
+              [(ngModel)]="foto.commento" 
+              placeholder="Aggiungi un commento..." 
+              class="photo-comment" />
+            <button class="btn-upload-single" (click)="uploadSinglePhoto(foto)" [disabled]="foto.uploaded">
+              @if (foto.uploaded) {
+            Inviata
+          } @else if (!idPerizia) {
+            crea prima la perizia
+          } @else {
+            Invia
+          }
+            </button>
+          </div>
+        }
+      </div>
+    </section>
+
+    <!-- Footer Azioni -->
+    <footer class="action-footer">
+      <button class="btn-primary" [disabled]="isUploading" (click)="uploadTotal()">
+        @if (isUploading) { <ion-spinner name="crescent"></ion-spinner> }
+        @else { Invia Totale }
+      </button>
+    </footer>
+  </div>
+</ion-content>

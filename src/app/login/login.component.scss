@@ -1,0 +1,342 @@
+// ─── Variabili ────────────────────────────────────────────
+$bg:        #0d1117;
+$surface:   #161b22;
+$border:    #21262d;
+$border2:   #30363d;
+$text:      #e6edf3;
+$muted:     #7d8590;
+$amber:     #e8a020;
+$amber-dim: #a06010;
+$red:       #f85149;
+
+// ─── Content ──────────────────────────────────────────────
+.login-content {
+  --background: #{$bg};
+  --color: #{$text};
+}
+
+// ─── Wrapper centrato ─────────────────────────────────────
+.login-wrap {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px 24px;
+  gap: 0;
+  animation: fadeUp .4s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+// ─── Brand ────────────────────────────────────────────────
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.brand-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: $amber;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(232, 160, 32, .3);
+  flex-shrink: 0;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.brand-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: $text;
+  letter-spacing: .01em;
+  line-height: 1;
+}
+
+.brand-role {
+  font-size: 11px;
+  color: $muted;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+// ─── Titolo ───────────────────────────────────────────────
+.page-title {
+  text-align: center;
+  margin-bottom: 24px;
+
+  h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: $text;
+    margin: 0 0 6px;
+    line-height: 1.2;
+  }
+
+  p {
+    font-size: 13px;
+    color: $muted;
+    margin: 0;
+  }
+}
+
+// ─── Form card ────────────────────────────────────────────
+.form-card {
+  width: 100%;
+  max-width: 360px;
+  background: $surface;
+  border: 1px solid $border;
+  border-radius: 14px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, .4);
+}
+
+// ─── Campo ────────────────────────────────────────────────
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: $muted;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.field-inner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: $bg;
+  border: 1px solid $border2;
+  border-radius: 8px;
+  padding: 0 12px;
+  transition: border-color .15s;
+
+  &:focus-within {
+    border-color: $amber;
+  }
+}
+
+.field-icon {
+  color: $muted;
+  flex-shrink: 0;
+}
+
+.custom-input {
+  --background: transparent;
+  --color: #{$text};
+  --placeholder-color: #{$border2};
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  font-size: 14px;
+  flex: 1;
+}
+
+// ─── Errore ───────────────────────────────────────────────
+.error-box {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 12px;
+  background: rgba(248, 81, 73, .1);
+  border: 1px solid rgba(248, 81, 73, .3);
+  border-radius: 8px;
+  color: $red;
+  font-size: 12px;
+  line-height: 1.4;
+
+  svg { flex-shrink: 0; }
+}
+
+// ─── Bottone accedi ───────────────────────────────────────
+.btn-accedi {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 20px;
+  background: $amber;
+  border: none;
+  border-radius: 8px;
+  color: #000;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  cursor: pointer;
+  transition: background .15s, opacity .15s;
+  margin-top: 4px;
+
+  &:active:not(:disabled) {
+    background: $amber-dim;
+  }
+
+  &:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+  }
+}
+
+.btn-spin {
+  --color: #000;
+  width: 16px;
+  height: 16px;
+}
+
+// ─── Link password ────────────────────────────────────────
+.forgot-btn {
+  margin-top: 16px;
+  background: none;
+  border: none;
+  color: $muted;
+  font-size: 12px;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color .15s;
+
+  &:active { color: $text; }
+}
+
+// ─── Versione ─────────────────────────────────────────────
+.version-note {
+  margin-top: 32px;
+  font-size: 11px;
+  color: darken($muted, 20%);
+  text-align: center;
+  opacity: .5;
+}
+
+.separator {
+  margin: 20px 0;
+  text-align: center;
+  position: relative;
+  
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 1;
+  }
+
+
+  span {
+    background: #1a1a1a; // Colore dello sfondo della card
+    padding: 0 10px;
+    color: #888;
+    font-size: 0.8rem;
+    position: relative;
+    z-index: 2;
+  }
+}
+
+  .google-login-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  height: 48px;
+  background-color: #ffffff !important; /* Forza lo sfondo bianco */
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  color: #1a202c !important; /* Forza il testo scuro leggibile */
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s ease;
+  margin-top: 10px;
+  
+  /* Evita che Ionic applichi stili di default distruttivi */
+  text-transform: none;
+}
+
+.google-login-btn:hidden {
+  display: flex !important;
+}
+
+.google-login-btn:hover {
+  background-color: #f7fafc !important;
+}
+
+.google-login-btn svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+.btn-google {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+
+
+  &:active {
+    transform: scale(0.98);
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+.google-button-container {
+  display: flex;
+  justify-content: center;  // Centra orizzontalmente
+  align-items: center;      // Centra verticalmente
+  width: 100%;              // Occupa tutta la larghezza disponibile
+  min-height: 44px;         // Altezza minima per evitare saltelli (layout shift)
+  
+  /* Se vuoi che il bottone non superi mai una certa larghezza */
+  #myGoogleDiv {
+    display: inline-block;
+    margin: 0 auto;
+    text-align: center;
+  }
+}
+
+// ─── Responsive ───────────────────────────────────────────
+@media (max-width: 380px) {
+  .form-card {
+    padding: 20px 16px;
+  }
+  .page-title h1 {
+    font-size: 22px;
+  }
+}

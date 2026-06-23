@@ -1,0 +1,30 @@
+<ion-content [fullscreen]="true" class="main-container">
+  
+  <!-- Sfondo decorativo soft per effetto Glass -->
+  <div class="blob"></div>
+
+  <div class="content-wrapper">
+    <!-- Header Minimal -->
+    <header class="glass-header">
+      <div class="brand">
+        <span class="op-label">OPERATORE</span>
+        <h1 class="op-id">{{perizieService.username}}</h1>
+      </div>
+    </header>
+
+    <!-- Azione Principale: Il Pulsantone -->
+    <div class="main-action" (click)="startNewPerizia()">
+      <div class="action-glass">
+        <div class="plus-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+        </div>
+        <h2>Nuova Perizia</h2>
+        <p>Tocca per iniziare il rilievo</p>
+      </div>
+    </div>
+  </div>
+
+</ion-content>
